@@ -9,6 +9,7 @@ pros::Motor leftRear(-11,pros::v5::MotorGears::green, pros::v5::MotorUnits::degr
 pros::Motor rightFront(15,pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 pros::Motor rightMiddle(14,pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
 pros::Motor rightRear(16,pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
+pros::Motor intake(19);
 
 pros::adi::DigitalOut clamp('a');
 
@@ -43,6 +44,12 @@ void opcontrol() {
 			clamp.set_value(HIGH);
 		} else {
 			clamp.set_value(LOW);
+		}
+
+		if (master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+			intake.move(127);
+		} else {
+			intake.move(0);
 		}
 
 		pros::delay(20);
